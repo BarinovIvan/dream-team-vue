@@ -3,24 +3,32 @@
     <div class="carousel">
       <div class="carousel__inner" ref="inner" :style="innerStyles">
         <img
-            v-for="(item, index) in cards"
-            :key="index"
+            v-for="item in cards"
+            :key="item.id"
             :src="getImgUrl(item)"
             alt="Carousel image"
+            class="carousel__image"
         />
 
       </div>
     </div>
     <div class="carousel__buttons">
-      <button @click="prev()"> <- </button>
-      <button @click="next()"> -> </button>
+      <arrow-backwards @click="prev()"/>
+      <arrow-forward @click="next()" />
     </div>
   </div>
 </template>
 
 <script>
+  import ArrowBackwards from "@/components/IconComponents/ArrowBackward.vue";
+  import ArrowForward from "@/components/IconComponents/ArrowForward.vue";
+
   export default {
     name: "PictureCarousel",
+    components: {
+      ArrowForward,
+      ArrowBackwards
+    },
     data() {
       return {
         innerStyles: {},
@@ -113,6 +121,7 @@
   .carousel {
     width: fit-content;
     overflow: hidden;
+    margin-bottom: 32px;
 
     &__inner {
       white-space: nowrap;
@@ -122,10 +131,9 @@
       transition: transform 0.4s;
     }
     &__buttons {
-      button {
-        padding: 20px;
-        cursor: pointer;
-      }
+      display: flex;
+      justify-content: center;
+      gap: 32px;
     }
 
     @media (max-width: $breakpoint-md) {

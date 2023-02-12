@@ -4,17 +4,20 @@
     <div class="container">
       <welcome-block class="main__welcome"/>
       <picture-carousel :item-list="imageList" class="main__carousel" />
+      <other-tours />
     </div>
   </div>
 </template>
 
 <script>
   import WelcomeBlock from "@/components/WelcomeBlock.vue";
-  import PictureCarousel from "@/components/ui/PictureCarousel";
+  import PictureCarousel from "@/components/ui/PictureCarousel.vue";
+  import OtherTours from "@/components/OtherTours.vue";
 
   export default {
     name: 'App',
     components: {
+      OtherTours,
       PictureCarousel,
       WelcomeBlock
     },
@@ -22,27 +25,35 @@
       return {
         imageList: [
           {
+            id: 1,
             imgName: 'Carousel1.png'
           },
           {
+            id: 2,
             imgName: 'Carousel2.png'
           },
           {
+            id: 3,
             imgName: 'Carousel3.png'
           },
           {
+            id: 4,
             imgName: 'Carousel4.png'
           },
           {
+            id: 5,
             imgName: 'Carousel1.png'
           },
           {
+            id: 6,
             imgName: 'Carousel2.png'
           },
           {
+            id: 7,
             imgName: 'Carousel3.png'
           },
           {
+            id: 8,
             imgName: 'Carousel4.png'
           }
         ]
@@ -56,22 +67,19 @@
 
   .main {
     overflow-x: hidden;
+
+    .container > *, & > * {
+      margin-bottom: 64px;
+    }
     &__image {
       width: 100%;
       height: 480px;
       object-fit: cover;
-      margin-bottom: 64px;
 
       @media (max-width: $breakpoint-md) {
         height: 160px;
         margin-bottom: 40px;
       }
-    }
-    &__welcome {
-      margin-bottom: 64px;
-    }
-    &__carousel {
-
     }
   }
 </style>
