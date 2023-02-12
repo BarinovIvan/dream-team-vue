@@ -40,19 +40,21 @@
       }
     },
     mounted() {
-      setTimeout(this.setStep, 10)
-      setTimeout(this.resetTranslate, 10)
+      setTimeout(this.setStep, 100)
+      setTimeout(this.resetTranslate, 100)
     },
     methods: {
       setStep() {
         const innerWidth = this.$refs.inner.scrollWidth
         const itemAmount = this.itemList.length
-        this.step = `${innerWidth / itemAmount}px`
+        this.step = `${ innerWidth / itemAmount + 13 }px`
       },
       next() {
         if (this.transitioning) return
         this.transitioning = true
+
         this.moveLeft()
+
         this.afterTransition(() => {
           const card = this.cards.shift()
           this.cards.push(card)
@@ -63,7 +65,9 @@
       prev() {
         if (this.transitioning) return
         this.transitioning = true
+
         this.moveRight()
+
         this.afterTransition(() => {
           const card = this.cards.pop()
           this.cards.unshift(card)
