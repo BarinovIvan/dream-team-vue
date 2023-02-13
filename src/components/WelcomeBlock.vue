@@ -2,8 +2,11 @@
   <div class="welcome">
     <div class="welcome__title">
       <h1>Walking in Old Tallinn</h1>
-      <custom-button title="Feedback"></custom-button>
+      <custom-button @click="isModalOpen=true" title="Feedback"></custom-button>
     </div>
+    <custom-dialog v-model="isModalOpen" >
+      <feedback-form />
+    </custom-dialog>
     <div class="welcome__text">
       <p>
         Welcome to Old Tallinn, the heart of the Estonian capital!
@@ -27,10 +30,21 @@
 
 <script>
   import CustomButton from "@/components/ui/CustomButton.vue";
+  import CustomDialog from "@/components/ui/CustomDialog.vue";
+  import FeedbackForm from "@/components/FeedbackForm.vue";
 
   export default {
     name: "WelcomeBlock",
-    components: {CustomButton}
+    components: {
+      FeedbackForm,
+      CustomDialog,
+      CustomButton
+    },
+    data() {
+      return {
+        isModalOpen: false
+      }
+    }
 
   }
 </script>
