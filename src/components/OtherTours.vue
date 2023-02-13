@@ -34,19 +34,22 @@
             id: 1,
             title: 'St. Isaac\'s Cathedral in St. Petersburg',
             caption: 'One of the highest domed structures in the world.',
-            imgName: 'Tour1.png'
+            imgName: 'Tour1.png',
+            favourite: false
           },
           {
             id: 2,
             title: 'The Bridge of Peace, Tbilisi',
             caption: 'Arc-shaped pedestrian bridge made of glass and steel',
-            imgName: 'Tour2.png'
+            imgName: 'Tour2.png',
+            favourite: false
           },
           {
             id: 3,
             title: 'El Caminito del Rey, Argentina',
             caption: 'Tango, Open-air Museum, Painting, Art and History',
-            imgName: 'Tour3.png'
+            imgName: 'Tour3.png',
+            favourite: false
           }
         ]
       }
