@@ -27,6 +27,8 @@ export default {
     line-height: 22px;
     font-size: 16px;
     outline: none;
+
+    transition: all 0.2s ease;
   }
 
   .input:hover {
