@@ -4,8 +4,8 @@
     <div class="tours__list">
       <template v-if="!isMobile">
         <tour-card
-            v-for="tour in tours"
-            :key="tour.id"
+            v-for="(tour, index) in tours"
+            :key="index"
             :tour="tour"
             class="tours__list-item"
         />
@@ -26,25 +26,6 @@
     components: {
       PictureCarousel,
       TourCard
-    },
-    computed: {
-      isMobile() {
-        return this.$breakpoints.md
-      }
-    },
-    mounted() {
-      this.$breakpoints.init()
-    },
-    watch: {
-      isMobile() {
-        if (this.isMobile) {
-          const tempArray = this.tours.slice(0)
-          this.tours = this.tours.concat(tempArray)
-        }
-        if (!this.isMobile) {
-          this.tours.splice(this.tours.length/2)
-        }
-      }
     },
     data() {
       return {
@@ -68,6 +49,34 @@
             imgName: 'Tour3.png'
           }
         ]
+      }
+    },
+    computed: {
+      isMobile() {
+        return this.$breakpoints.md
+      }
+    },
+    mounted() {
+      this.$breakpoints.init()
+    },
+    watch: {
+      isMobile() {
+        if (this.isMobile) {
+          this.doubleList()
+        }
+        if (!this.isMobile) {
+          this.dissectList()
+        }
+      }
+    },
+    methods: {
+      doubleList() {
+        const tempArray = [...this.tours]
+        this.tours = this.tours.concat(tempArray)
+
+      },
+      dissectList() {
+        this.tours.splice(this.tours.length/2)
       }
     },
     beforeDestroy() {

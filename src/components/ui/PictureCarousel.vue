@@ -3,8 +3,8 @@
     <div class="carousel">
       <div class="carousel__inner" ref="inner" :style="innerStyles">
         <div
-            v-for="item in cards"
-            :key="item.id"
+            v-for="(item, index) in cards"
+            :key="index"
             class="carousel__inner-card card"
         >
           <img
@@ -54,17 +54,22 @@
     computed: {
       cards() {
         return this.itemList
+      },
+      isMobile() {
+        return this.$breakpoints.md
       }
     },
     mounted() {
       setTimeout(this.setStep, 100)
       setTimeout(this.resetTranslate, 100)
+      this.$breakpoints.init()
     },
     methods: {
       setStep() {
         const innerWidth = this.$refs.inner.scrollWidth
         const itemAmount = this.itemList.length
-        this.step = `${ innerWidth / itemAmount + 13 }px`
+        const mobileFix = this.isMobile ? 0 : 13
+        this.step = `${ innerWidth / itemAmount + mobileFix }px`
       },
       next() {
         if (this.transitioning) return
@@ -119,6 +124,9 @@
       },
       getImgUrl(path) {
         return  require('@/assets/images/' + path)
+      },
+      beforeDestroy() {
+        this.$breakpoints.remove()
       }
     }
   }
