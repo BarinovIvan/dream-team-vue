@@ -32,5 +32,9 @@
     &:hover {
       background: $blue-dark;
     }
+    
+    @media (max-width: $breakpoint-sm) {
+      padding: 21px 71px;
+    }
   }
 </style>

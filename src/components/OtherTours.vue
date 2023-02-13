@@ -2,23 +2,49 @@
   <div class="tours">
     <h1 class="tours__title">Other tours</h1>
     <div class="tours__list">
-      <tour-card
-          v-for="tour in tours"
-          :key="tour.id"
-          :tour="tour"
-          class="tours__list-item"
-      />
+      <template v-if="!isMobile">
+        <tour-card
+            v-for="tour in tours"
+            :key="tour.id"
+            :tour="tour"
+            class="tours__list-item"
+        />
+      </template>
     </div>
+    <template v-if="isMobile">
+      <picture-carousel :item-list="tours"/>
+    </template>
   </div>
 </template>
 
 <script>
   import TourCard from "@/components/TourCard.vue";
+  import PictureCarousel from "@/components/ui/PictureCarousel.vue";
 
   export default {
     name: "OtherTours",
     components: {
+      PictureCarousel,
       TourCard
+    },
+    computed: {
+      isMobile() {
+        return this.$breakpoints.md
+      }
+    },
+    mounted() {
+      this.$breakpoints.init()
+    },
+    watch: {
+      isMobile() {
+        if (this.isMobile) {
+          const tempArray = this.tours.slice(0)
+          this.tours = this.tours.concat(tempArray)
+        }
+        if (!this.isMobile) {
+          this.tours.splice(this.tours.length/2)
+        }
+      }
     },
     data() {
       return {
@@ -43,21 +69,35 @@
           }
         ]
       }
+    },
+    beforeDestroy() {
+      this.$breakpoints.remove()
     }
   }
 </script>
 
 <style lang="scss" scoped>
+  @import "@/assets/styles/variables.scss";
+
   .tours {
     &__title {
       margin-bottom: 64px;
+
+      @media (max-width: $breakpoint-md) {
+        margin-bottom: 40px;
+      }
     }
     &__list {
       display: flex;
       justify-content: space-between;
+      gap: 32px;
 
       &-item {
-        width: calc(100% / 3 - 66px/2);
+        width: calc(100% / 3 );
+
+        @media (max-width: $breakpoint-lg) {
+          padding: 0;
+        }
       }
     }
   }

@@ -2,17 +2,24 @@
   <div>
     <div class="carousel">
       <div class="carousel__inner" ref="inner" :style="innerStyles">
-        <img
+        <div
             v-for="item in cards"
             :key="item.id"
-            :src="getImgUrl(item.imgName)"
-            alt="Carousel image"
-            class="carousel__image"
-        />
-
+            class="carousel__inner-card card"
+        >
+          <img
+              v-if="!item.title && !item.caption"
+              :src="getImgUrl(item.imgName)"
+              alt="Carousel image"
+              class="card__image"
+          />
+          <template v-else>
+            <tour-card :tour="item" class="card__item"/>
+          </template>
+        </div>
       </div>
     </div>
-    <div class="carousel__buttons">
+    <div class="buttons">
       <arrow-backwards @click="prev()"/>
       <arrow-forward @click="next()" />
     </div>
@@ -22,10 +29,12 @@
 <script>
   import ArrowBackwards from "@/components/IconComponents/ArrowBackward.vue";
   import ArrowForward from "@/components/IconComponents/ArrowForward.vue";
+  import TourCard from "@/components/TourCard";
 
   export default {
     name: "PictureCarousel",
     components: {
+      TourCard,
       ArrowForward,
       ArrowBackwards
     },
@@ -129,18 +138,28 @@
       gap: 32px;
 
       transition: transform 0.4s;
-    }
-    &__buttons {
-      display: flex;
-      justify-content: center;
-      gap: 32px;
-    }
 
-    @media (max-width: $breakpoint-md) {
-      &__image {
-        width: 266px;
-        height: 284px;
+      &-card {
+        .card__item {
+          width: 266px;
+          padding: 0;
+        }
+      }
+
+      @media (max-width: $breakpoint-md) {
+        .card__image {
+          width: 266px;
+          height: 284px;
+        }
+      }
+      @media (max-width: $breakpoint-md) {
+        white-space: normal;
       }
     }
+  }
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
   }
 </style>

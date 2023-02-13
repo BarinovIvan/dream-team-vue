@@ -70,6 +70,12 @@
 
     .container > *, & > * {
       margin-bottom: 64px;
+
+      @media (max-width: $breakpoint-md) {
+        & > * {
+          margin-bottom: 40px;
+        }
+      }
     }
     &__image {
       width: 100%;

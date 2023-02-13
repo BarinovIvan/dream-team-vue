@@ -46,11 +46,21 @@
       font-size: 32px;
       line-height: 38px;
       margin-bottom: 16px;
+
+      @media (max-width: $breakpoint-md) {
+        font-size: 20px;
+        line-height: 28px;
+      }
     }
     &__caption {
       color: $font-secondary;
       font-weight: 400;
       font-size: 16px;
+
+      @media (max-width: $breakpoint-md) {
+        font-size: 14px;
+        line-height: 22px;
+      }
     }
   }
 </style>
