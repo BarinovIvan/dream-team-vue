@@ -9,6 +9,8 @@
           class="input"
           readonly
       />
+      <arrow-disabled v-if="!isDropdownShown" class="select__arrow" />
+      <arrow-active v-else class="select__arrow" />
     </div>
     <transition name="slide" appear>
       <div v-if="isDropdownShown" class="dropdown">
@@ -26,8 +28,11 @@
 </template>
 
 <script>
+  import ArrowDisabled from "@/components/IconComponents/ArrowDisabled";
+  import ArrowActive from "@/components/IconComponents/ArrowActive";
   export default {
     name: "DropdownSelect",
+    components: {ArrowActive, ArrowDisabled},
     data() {
       return {
         isDropdownShown: false,
@@ -78,6 +83,12 @@
       :active {
         border: 1px solid #659DBD;
       }
+    }
+    &__arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 21px;
     }
   }
 
