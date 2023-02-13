@@ -5,7 +5,7 @@
         <img
             v-for="item in cards"
             :key="item.id"
-            :src="getImgUrl(item)"
+            :src="getImgUrl(item.imgName)"
             alt="Carousel image"
             class="carousel__image"
         />
@@ -108,8 +108,8 @@
           transform: `translateX(-${this.step})`
         }
       },
-      getImgUrl(pet) {
-        return  require('@/assets/images/' + pet.imgName)
+      getImgUrl(path) {
+        return  require('@/assets/images/' + path)
       }
     }
   }
