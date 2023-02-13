@@ -65,13 +65,13 @@ export default {
     align-items: center;
   }
 
-  .v-enter-active,
-  .v-leave-active {
+  .fade-enter-active,
+  .fade-leave-active {
     transition: opacity 0.5s ease;
   }
 
-  .v-enter-from,
-  .v-leave-to {
+  .fade-enter-from,
+  .fade-leave-to {
     opacity: 0;
   }
 </style>
