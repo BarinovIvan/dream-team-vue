@@ -59,6 +59,22 @@ export default {
       overflow-y: auto;
       overflow-x: hidden;
 
+      &::-webkit-scrollbar
+      {
+        width: 4px;
+      }
+
+      &::-webkit-scrollbar-thumb
+      {
+        border-radius: 4px;
+        background: #b4b4b4;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background: #525252;
+        cursor: pointer;
+      }
+
       &__close {
         position: absolute;
         top: 10px;
