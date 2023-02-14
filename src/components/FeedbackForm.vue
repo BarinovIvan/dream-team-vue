@@ -19,16 +19,36 @@
         <dropdown-select v-model="feedbackData.trip" name="trip-input"/>
       </div>
     </div>
+    <feedback-chips @theme-selected="changeTheme($event)"/>
+    <div class="form__item message">
+      <label for="message-input">Describe your question</label>
+      <custom-input v-model="feedbackData.message" name="message-input" type="textarea"/>
+    </div>
+    <div class="form__bottom">
+      <div class="form__bottom-agreement">
+        <custom-checkbox v-model="feedbackData.agreement" />
+        <p>Даю согласие на обработку</p>
+      </div>
+      <custom-button title="Send" :disabled="!feedbackData.agreement"/>
+    </div>
   </div>
 </template>
 
 <script>
   import CustomInput from "@/components/ui/CustomInput.vue";
-  import DropdownSelect from "@/components/ui/DropdownSelect";
+  import DropdownSelect from "@/components/ui/DropdownSelect.vue";
+  import CustomChip from "@/components/ui/CustomChip.vue";
+  import FeedbackChips from "@/components/FeedbackChips";
+  import CustomCheckbox from "@/components/ui/CustomCheckbox";
+  import CustomButton from "@/components/ui/CustomButton";
 
   export default {
     name: "FeedbackForm",
     components: {
+      CustomButton,
+      CustomCheckbox,
+      FeedbackChips,
+      CustomChip,
       DropdownSelect,
       CustomInput
     },
@@ -43,6 +63,11 @@
           message: '',
           agreement: false
         }
+      }
+    },
+    methods: {
+      changeTheme(theme) {
+        this.feedbackData.theme = theme
       }
     }
   }
@@ -74,9 +99,53 @@
         display: flex;
         flex-direction: column;
         gap: 16px;
-        width: calc(100%/2 - 32px);
+        width: calc(100% / 2 - 32px);
+
+        @media (max-width: $breakpoint-md) {
+          width: 100%;
+        }
+      }
+
+      @media (max-width: $breakpoint-md) {
+        width: 100%;
       }
     }
 
+    .form__item {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: calc(100% / 2 - 32px);
+
+      @media (max-width: $breakpoint-md) {
+        width: 100%;
+      }
+    }
+
+    .form__bottom {
+      display: flex;
+      justify-content: space-between;
+
+      &-agreement {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        align-items: center;
+      }
+
+      @media (max-width: $breakpoint-md) {
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+
+    .message {
+      width: 100%;
+
+     textarea {
+        min-height: 128px;
+        resize: none;
+      }
+    }
   }
 </style>

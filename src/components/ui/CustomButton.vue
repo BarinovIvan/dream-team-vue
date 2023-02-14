@@ -1,5 +1,9 @@
 <template>
-  <button @click="$emit('click')">
+  <button
+      @click="$emit('click')"
+      :disabled="disabled"
+      :class="{ 'disabled': disabled }"
+  >
     {{ title }}
   </button>
 </template>
@@ -11,6 +15,10 @@
       title: {
         type: String,
         default: ''
+      },
+      disabled: {
+        type: Boolean,
+        default: false
       }
     }
   }
@@ -35,6 +43,15 @@
     
     @media (max-width: $breakpoint-sm) {
       padding: 21px 71px;
+    }
+  }
+
+  .disabled {
+    background: #EAEAEA;
+    cursor: default;
+
+    &:hover {
+      background: #EAEAEA;
     }
   }
 </style>

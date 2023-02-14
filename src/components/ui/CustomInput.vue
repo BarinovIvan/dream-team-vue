@@ -1,8 +1,16 @@
 <template>
   <input
+      v-if="type !== 'textarea'"
       :value="value"
       @input="$emit('input', $event.target.value)"
-      type="text"
+      :type="type"
+      placeholder="Placeholder"
+      class="input"
+  />
+  <textarea
+      v-else
+      :value="value"
+      @input="$emit('input', $event.target.value)"
       placeholder="Placeholder"
       class="input"
   />
@@ -15,6 +23,10 @@ export default {
     value: {
       type: String,
       default: ''
+    },
+    type: {
+      type: String,
+      default: 'text'
     }
   }
 }

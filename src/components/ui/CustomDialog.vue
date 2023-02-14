@@ -1,7 +1,8 @@
 <template>
   <transition name="fade" appear>
     <div
-        :class="['modal-wrapper', { 'open': value }]"
+        v-if="value"
+        class="modal-wrapper"
         @click.self="closeModal()"
     >
       <div class="modal">
@@ -16,7 +17,9 @@
 import CloseIcon from "@/components/IconComponents/CloseIcon";
 export default {
   name: "CustomDialog",
-  components: {CloseIcon},
+  components: {
+    CloseIcon
+  },
   props: {
     value: {
       type: Boolean,
@@ -41,14 +44,20 @@ export default {
     bottom: 0;
     right: 0;
     left: 0;
-    display: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: rgba(35, 35, 35, 0.78);
+    opacity: 1;
 
     .modal {
       position: relative;
       padding: 64px 40px;
       margin: 0 auto;
       background: $white-color;
+      max-height: calc(100vh - 210px);
+      overflow-y: auto;
+      overflow-x: hidden;
 
       &__close {
         position: absolute;
@@ -59,15 +68,9 @@ export default {
     }
   }
 
-  .open {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
   .fade-enter-active,
   .fade-leave-active {
-    transition: opacity 0.5s ease;
+    transition: opacity 0.4s ease;
   }
 
   .fade-enter-from,
